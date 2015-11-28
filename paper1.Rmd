@@ -28,6 +28,7 @@ data2$CONSERVANCY <- as_factor(data2$CONSERVANCY)
 We measured trust in social institutions using the following variables 
 
 ## Trust in institutions
+Trust forms the glue that binds communities. Interrogating trust can help measure the level. Participants wer are asked whether the
 ### Participation 
 Entails attending meetings at local level and also general conservancy level meetings. Using q1.2, and q1.4,  q1.3(satisfaction with meetings).  Some of the barriers to participation include the location of the meeting 
 
@@ -40,9 +41,9 @@ Entails attending meetings at local level and also general conservancy level mee
 q7.1a, q7.2, q7.3, q7.4
 # Rights
 
-We measured community percpetion of rights using 11 items
+We measured community percpetion of rights using 11 items. The 
 
-```{r rights}
+```{r rights, results = "asis"}
 a <- data2  %>% 
   group_by(CONSERVANCY) %>%
   summarise(rightsI =  mean(rightsIndex), 
@@ -67,11 +68,32 @@ chisq.test(data2$SEX, data2$rightsIndex)
 
 ## Which rights do people feel they have?
 
+```{r}
+
+my.list <- lapply(c('Q2_7A', 'Q2_7B', 'Q2_7C','Q2_7D', 
+                    'Q2_7E', 'Q2_7F', 'Q2_7G', 'Q2_7H', 
+                    'Q2_7I', 'Q2_7J', 'Q2_7K'),
+                  function(x)chisq.test(data2$CONSERVANCY, data2[[x]]))
+print(my.list)
+```
+ Variable 4 and 5 shows that there is a significant difference among the conservancies with regards to how members perceive their rights
+ 
+additional analyses for gender is as below. The perception of rights was not differnt for men and women except for the right to amend the constitution 
+ 
+ 
+```{r}
+my.list2 <- lapply(c('Q2_7A', 'Q2_7B', 'Q2_7C','Q2_7D', 
+                    'Q2_7E', 'Q2_7F', 'Q2_7G', 'Q2_7H', 
+                    'Q2_7I', 'Q2_7J', 'Q2_7K'),
+                  function(x)chisq.test(data2$SEX, data2[[x]]))
+print(my.list)
+```
 
 
 # Knowledge
 ## How well informed are they about what is happening in the conservancy
 q8.1-q8.14 summarises the amount of information that communities perceive to receive. We are interested in whethe this it managed strategically by the elite. Do they provide some forms of information and withhold some information as a management strategy or a tool for capturing resources.  
+With regards to access to financial information, three questions were asked and this included (Information on the Annual Budget, Information on source and amount of income, how the income was spent, hunting qouta, )
 
 # Qualitative Data 
 ## Summary of the key governance issues in each community
