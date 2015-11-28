@@ -48,14 +48,21 @@ a <- data2  %>%
   summarise(rightsI =  mean(rightsIndex), 
             N = n()) %>% 
   arrange(desc(rightsI))
-kable(a)
+print(a)
 
 ```
 
 The results show that there is a significant diffrence in the what rights community members perceive to have. Community members in Wuparo had a stronger perception of rights compared to other communities while it was low in Sobbe. The relationship is significant at  . 
 
 ```{r, warning=FALSE}
-chisq.test(data2$CONSERVANCY, data2$rightsIndex)
+b <- chisq.test(data2$CONSERVANCY, data2$rightsIndex)
+print(b)
+```
+
+The perception of rights did not vary significant between men and women 
+
+```{r, warning= FALSE}
+chisq.test(data2$SEX, data2$rightsIndex)
 ```
 
 ## Which rights do people feel they have?
