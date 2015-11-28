@@ -8,12 +8,17 @@ output: html_document
 This paper interrogates the question whether poor governance results from weak perception of rights. It uses data collected from CBNRM governance across five countries. The main hypothesis is that low perception of rights, trust, and lack of knowledge correlate with weak governance. If people do not care, leaders can get away with embezzlement and elite capture of resources. 
 
 ```{r}
-library(haven)
+library(haven); library(knitr)
 library(dplyr)
-setwd("C:/Users/SM/Box Sync/Rprogramming/Dashboard_Analysis")
+library(car)
 data1 <- read_spss("Dashboard Namibia 2009.sav")
 data2 <- select(data1, QUESTIONNAIRENO: Q3_10, Q7_1A:Q8_14)
-
+data2[ , 41:51]  <- lapply(data2[ ,41:51] ,
+                           FUN = function(x) recode(x, "1=1;2=0;NA =0"))
+data2 <- data2 %>% 
+mutate(rightsIndex = Q2_7A + Q2_7B + Q2_7C + Q2_7D +  
+         Q2_7E+ Q2_7F+ Q2_7G+ Q2_7H+  Q2_7I +  Q2_7J +  Q2_7K)
+data2$CONSERVANCY <- as_factor(data2$CONSERVANCY)
 ```
 
 
@@ -31,9 +36,28 @@ Entails attending meetings at local level and also general conservancy level mee
 ## Fairness in the election of leaders
  Elections are a democratic means of selecting leaders but in Africa recent evidence shows they can be manipulated. When asked how leaders are selected, most community members felt (q3.6, q3.7, q3.8)
 
-## Trust in managing the finances
+# Trust in managing the finances
 q7.1a, q7.2, q7.3, q7.4
 # Rights
+
+We measured community percpetion of rights using 11 items
+
+```{r rights}
+a <- data2  %>% 
+  group_by(CONSERVANCY) %>%
+  summarise(rightsI =  mean(rightsIndex), 
+            N = n()) %>% 
+  arrange(desc(rightsI))
+kable(a)
+
+```
+
+The results show that there is a significant diffrence in the what rights community members perceive to have. Community members in Wuparo had a stronger perception of rights compared to other communities while it was low in Sobbe. The relationship is significant at  . 
+
+```{r, warning=FALSE}
+chisq.test(data2$CONSERVANCY, data2$rightsIndex)
+```
+
 ## Which rights do people feel they have?
 
 
