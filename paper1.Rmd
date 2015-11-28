@@ -1,0 +1,52 @@
+---
+title: "Is there a correlation between governance and perception of rights"
+author: "Shylock Muyengwa"
+date: "November 23, 2015"
+output: html_document
+---
+
+This paper interrogates the question whether poor governance results from weak perception of rights. It uses data collected from CBNRM governance across five countries. The main hypothesis is that low perception of rights, trust, and lack of knowledge correlate with weak governance. If people do not care, leaders can get away with embezzlement and elite capture of resources. 
+
+```{r}
+library(haven)
+library(dplyr)
+setwd("C:/Users/SM/Box Sync/Rprogramming/Dashboard_Analysis")
+data1 <- read_spss("Dashboard Namibia 2009.sav")
+data2 <- select(data1, QUESTIONNAIRENO: Q3_10, Q7_1A:Q8_14)
+
+```
+
+
+
+# Social Trust 
+
+We measured trust in social institutions using the following variables 
+
+## Trust in institutions
+### Participation 
+Entails attending meetings at local level and also general conservancy level meetings. Using q1.2, and q1.4,  q1.3(satisfaction with meetings).  Some of the barriers to participation include the location of the meeting 
+
+## Trust in leaders
+## Knowledge of leaders
+## Fairness in the election of leaders
+ Elections are a democratic means of selecting leaders but in Africa recent evidence shows they can be manipulated. When asked how leaders are selected, most community members felt (q3.6, q3.7, q3.8)
+
+## Trust in managing the finances
+q7.1a, q7.2, q7.3, q7.4
+# Rights
+## Which rights do people feel they have?
+
+
+
+# Knowledge
+## How well informed are they about what is happening in the conservancy
+q8.1-q8.14 summarises the amount of information that communities perceive to receive. We are interested in whethe this it managed strategically by the elite. Do they provide some forms of information and withhold some information as a management strategy or a tool for capturing resources.  
+
+# Qualitative Data 
+## Summary of the key governance issues in each community
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
